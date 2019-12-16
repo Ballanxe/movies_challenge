@@ -1,1 +1,3 @@
 .python-version
+__pycache__/*.pyc
+movieschallenge/settings/__pycache__/
