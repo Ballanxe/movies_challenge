@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__)))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Auth user model
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'persons.Person'
 
 # Application definition
 
@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # local apps
-    'apps.users',
+    'movieschallenge.apps.persons',
+    'movieschallenge.apps.movies',
+    'movieschallenge.apps.core'
 ]
 
 MIDDLEWARE = [
@@ -78,13 +80,6 @@ WSGI_APPLICATION = 'movieschallenge.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
