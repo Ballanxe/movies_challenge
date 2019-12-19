@@ -1,15 +1,15 @@
 from django.conf.urls import include, url
 
-# from rest_framework.routers import DefaultRouter
+from rest_framework.routers import DefaultRouter
 
-# from .views import (
-# 	ArticleViewSet,
-# 	CommentsListCreateAPIView,
-# 	CommentsDestroyAPIView,
-# 	ArticlesFavoriteAPIView,
-# 	TagListAPIView,
-# 	ArticlesFeedAPIView
-# )
+from .views import (
+	ArticleViewSet,
+	CommentsListCreateAPIView,
+	CommentsDestroyAPIView,
+	ArticlesFavoriteAPIView,
+	TagListAPIView,
+	ArticlesFeedAPIView
+)
 
 
 router = DefaultRouter(trailing_slash=False)

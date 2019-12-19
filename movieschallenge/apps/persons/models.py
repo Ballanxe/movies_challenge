@@ -1,20 +1,23 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from movieschallenge.apps.core.models import TimestampedModel
+from movieschallenge.apps.movies.models import Movie
 
+User = get_user_model()
 
-class Person(TimestampedModel):
+class Person(TimestampedModel, User):
     """Person"""
-    
-    first_name = models.CharField(db_index=True, max_length=255, unique=True)
-    last_name = models.CharField(db_index=True, max_length=255, unique=True)
-    email = models.EmailField(db_index=True, unique=True)
+
     aliases = models.CharField(db_index=True, max_length=255, unique=True)
-    movies_as_actor = models.ForeignKey('apps.Movies', related_name='actors', on_delete=models.CASCADE)
+    movies_as_actor = models.ForeignKey(Movie, related_name='actors', on_delete=models.CASCADE)
     movies_as_director = models.ForeignKey(
-        'apps.Movies', related_name='directors', on_delete=models.CASCADE)
+        Movie, related_name='directors', on_delete=models.CASCADE)
     movies_as_producer = models.ForeignKey(
-        'apps.Movies', related_name='producers', on_delete=models.CASCADE)
+        Movie, related_name='producers', on_delete=models.CASCADE)
+
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
 

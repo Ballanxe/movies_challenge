@@ -28,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Auth user model
-AUTH_USER_MODEL = 'persons.Person'
+# # Auth user model
+# AUTH_USER_MODEL = 'persons.Person'
 
 # Application definition
 
