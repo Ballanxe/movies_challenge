@@ -6,15 +6,16 @@ from movieschallenge.apps.movies.models import Movie
 
 User = get_user_model()
 
+
 class Person(TimestampedModel, User):
     """Person"""
 
     aliases = models.CharField(db_index=True, max_length=255, unique=True)
-    movies_as_actor = models.ForeignKey(Movie, related_name='actors', on_delete=models.CASCADE)
+    movies_as_actor = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='fromactors')
     movies_as_director = models.ForeignKey(
-        Movie, related_name='directors', on_delete=models.CASCADE)
+        Movie, on_delete=models.CASCADE, related_name='persons+')
     movies_as_producer = models.ForeignKey(
-        Movie, related_name='producers', on_delete=models.CASCADE)
+        Movie, on_delete=models.CASCADE, related_name='persons+')
 
     REQUIRED_FIELDS = ['first_name', 'last_name']
     USERNAME_FIELD = 'email'
@@ -22,7 +23,6 @@ class Person(TimestampedModel, User):
     def __str__(self):
 
         return self.email
-
 
     def get_full_name(self):
 
