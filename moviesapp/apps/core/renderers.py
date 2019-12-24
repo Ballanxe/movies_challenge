@@ -12,7 +12,6 @@ class AppJSONRenderer(JSONRenderer):
 	def render(self, data, media_type=None, renderer_context=None):
 
 		if data is None:
-
 			return ''
 
 		if isinstance(data, ReturnList):
@@ -20,14 +19,12 @@ class AppJSONRenderer(JSONRenderer):
 				super(AppJSONRenderer, self).render(data).decode('utf-8')
 			)
 			return json.dumps({
-
 				self.object_label_plural: _data
 			})
 		else:
 
 			errors = data.get('errors', None)
 			if errors is not None:
-
 				return super(AppJSONRenderer, self).render(data)
 			return json.dumps({
 

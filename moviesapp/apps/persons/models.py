@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from movieschallenge.apps.core.models import TimestampedModel
-from movieschallenge.apps.movies.models import Movie
+from moviesapp.apps.core.models import TimestampedModel
+from moviesapp.apps.movies.models import Movie
 
 User = get_user_model()
 
 
-class Person(TimestampedModel, User):
+class Person(TimestampedModel):
     """Person"""
 
     aliases = models.CharField(db_index=True, max_length=255, unique=True)
@@ -16,6 +16,7 @@ class Person(TimestampedModel, User):
         Movie, on_delete=models.CASCADE, related_name='persons+')
     movies_as_producer = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name='persons+')
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
 
     REQUIRED_FIELDS = ['first_name', 'last_name']
     USERNAME_FIELD = 'email'
