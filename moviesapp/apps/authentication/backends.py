@@ -41,7 +41,6 @@ class JWTAuthentication(authentication.BaseAuthentication):
 
 		return self._authenticate_credentials(request, token)
 
-	@staticmethod
 	def _authenticate_credentials(self, request, token):
 
 		"""
