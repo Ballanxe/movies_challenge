@@ -26,10 +26,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'api/v1/', include(('moviesapp.apps.authentication.urls', 'authentication'), namespace='auth')),
     path(r'api/v1/', include(('moviesapp.apps.persons.urls', 'persons'), namespace='persons')),
-    # url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    # url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    # url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    # path(r'docs/',
-    #      include_docs_urls(title='Reviews API', authentication_classes=[], permission_classes=[])),
+    path(r'api/v1/', include(('moviesapp.apps.movies.urls', 'movies'), namespace='movies')),
+    url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path(r'docs/',
+         include_docs_urls(title='Reviews API', authentication_classes=[], permission_classes=[])),
 
 ]
