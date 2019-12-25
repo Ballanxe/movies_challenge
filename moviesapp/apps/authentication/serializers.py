@@ -7,16 +7,12 @@ from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     password = serializers.CharField(
         max_length=128,
         min_length=8,
         write_only=True
     )
-
-    profile = PersonSerializer(write_only=True)
-
-    bio = serializers.CharField(source='profile.bio', read_only=True)
-    image = serializers.CharField(source='profile.image', read_only=True)
 
     class Meta:
 
@@ -26,9 +22,6 @@ class UserSerializer(serializers.ModelSerializer):
             'username',
             'password',
             'token',
-            'profile',
-            'bio',
-            'image'
         )
 
         read_only_fields = ('token',)
@@ -39,26 +32,20 @@ class UserSerializer(serializers.ModelSerializer):
         profile_data = validated_data.pop('profile', {})
 
         for (key, value) in validated_data.items():
-
             setattr(instance, key, value)
-
         if password is not None:
-            # `.set_password()`  handles all
-            # of the security stuff that we shouldn't be concerned with.
-
             instance.set_password(password)
-
         instance.save()
 
         for (key, value) in profile_data.items():
             setattr(instance.profile, key, value)
-
         instance.profile.save()
 
         return instance
 
 
 class LoginSerializer(serializers.Serializer):
+
     email = serializers.CharField(max_length=255)
     username = serializers.CharField(max_length=255, read_only=True)
     password = serializers.CharField(max_length=128, write_only=True)
@@ -98,7 +85,6 @@ class LoginSerializer(serializers.Serializer):
             'email': user.email,
             'username': user.username,
             'token': user.token
-
         }
 
 
